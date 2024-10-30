@@ -1,0 +1,408 @@
+/*
+This file contains queries to check data from bronze, silver and gold layer tables.
+If you prefer, you can use software like Dbeaver to open the datalake.db file and run the queries.
+*/
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+-- BRONZE
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+-- enfrentamento_nacional
+
+SELECT * FROM bronze.enfrentamento_nacional LIMIT 100
+
+SELECT count(*) FROM bronze.enfrentamento_nacional
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.enfrentamento_nacional ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_agro
+
+SELECT * FROM bronze.plano_agro LIMIT 100
+
+SELECT count(*) FROM bronze.plano_agro
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_agro ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_curitiba
+
+SELECT * FROM bronze.plano_curitiba LIMIT 200
+
+SELECT count(*) FROM bronze.plano_curitiba
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_curitiba ORDER BY page_number LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_federal
+
+SELECT * FROM bronze.plano_federal LIMIT 100
+
+SELECT count(*) FROM bronze.plano_federal
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_federal ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_itabirito
+
+SELECT * FROM bronze.plano_itabirito LIMIT 100
+
+SELECT count(*) FROM bronze.plano_itabirito
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_itabirito ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_joao_pessoa
+
+SELECT * FROM bronze.plano_joao_pessoa LIMIT 100
+
+SELECT count(*) FROM bronze.plano_joao_pessoa
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_joao_pessoa ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_nacional
+
+SELECT * FROM bronze.plano_nacional LIMIT 100
+
+SELECT count(*) FROM bronze.plano_nacional
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_nacional ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_sp
+
+SELECT * FROM bronze.plano_sp LIMIT 100
+
+SELECT count(*) FROM bronze.plano_sp
+
+SELECT LENGTH(content) AS len_page, * FROM bronze.plano_sp ORDER BY page_number LIMIT 100
+
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+-- SILVER
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+-- enfrentamento_nacional
+
+SELECT * FROM silver.enfrentamento_nacional LIMIT 100
+
+SELECT count(*) FROM silver.enfrentamento_nacional
+
+SELECT LENGTH(content) AS len_page, * FROM silver.enfrentamento_nacional ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_curitiba
+
+SELECT * FROM silver.plano_curitiba LIMIT 200
+
+SELECT count(*) FROM silver.plano_curitiba
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_curitiba ORDER BY page_number LIMIT 200
+
+
+------------------------------------------------------------------------------------------
+
+-- plano_agro
+
+SELECT * FROM silver.plano_agro LIMIT 200
+
+SELECT count(*) FROM silver.plano_agro
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_agro ORDER BY page_number LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_nacional
+
+SELECT * FROM silver.plano_nacional LIMIT 100
+
+SELECT count(*) FROM silver.plano_nacional
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_nacional ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_sp
+
+SELECT * FROM silver.plano_sp LIMIT 100
+
+SELECT count(*) FROM silver.plano_sp
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_sp ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_federal
+
+SELECT * FROM silver.plano_federal LIMIT 100
+
+SELECT count(*) FROM silver.plano_federal
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_federal ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_itabirito
+
+SELECT * FROM silver.plano_itabirito LIMIT 100
+
+SELECT count(*) FROM silver.plano_itabirito
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_itabirito ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_joao_pessoa
+
+SELECT * FROM silver.plano_joao_pessoa LIMIT 100
+
+SELECT count(*) FROM silver.plano_joao_pessoa
+
+SELECT LENGTH(content) AS len_page, * FROM silver.plano_joao_pessoa ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+-- GOLD
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+-- enfrentamento_nacional
+
+SELECT * FROM gold.enfrentamento_nacional LIMIT 100
+
+SELECT count(*) FROM gold.enfrentamento_nacional
+
+SELECT page_number, embedding[1] FROM gold.enfrentamento_nacional ORDER BY page_number LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_curitiba
+
+SELECT * FROM gold.plano_curitiba LIMIT 200
+
+SELECT count(*) FROM gold.plano_curitiba
+
+------------------------------------------------------------------------------------------
+
+-- plano_agro
+
+SELECT * FROM gold.plano_agro LIMIT 200
+
+SELECT count(*) FROM gold.plano_agro
+
+------------------------------------------------------------------------------------------
+
+-- plano_nacional
+
+SELECT * FROM gold.plano_nacional LIMIT 100
+
+SELECT count(*) FROM gold.plano_nacional
+
+------------------------------------------------------------------------------------------
+
+-- plano_sp
+
+SELECT * FROM gold.plano_sp LIMIT 100
+
+SELECT count(*) FROM gold.plano_sp
+
+------------------------------------------------------------------------------------------
+
+-- plano_federal
+
+SELECT * FROM gold.plano_federal LIMIT 100
+
+SELECT count(*) FROM gold.plano_federal
+
+------------------------------------------------------------------------------------------
+
+-- plano_itabirito
+
+SELECT * FROM gold.plano_itabirito LIMIT 100
+
+SELECT count(*) FROM gold.plano_itabirito
+
+------------------------------------------------------------------------------------------
+
+-- plano_joao_pessoa
+
+SELECT * FROM gold.plano_joao_pessoa LIMIT 100
+
+SELECT count(*) FROM gold.plano_joao_pessoa
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+-- JOIN: BRONZE X SILVER X GOLD
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+
+-- enfrentamento_nacional
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.enfrentamento_nacional t1
+LEFT JOIN silver.enfrentamento_nacional t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.enfrentamento_nacional t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_curitiba
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_curitiba t1
+LEFT JOIN silver.plano_curitiba t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_curitiba t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 100
+
+------------------------------------------------------------------------------------------
+
+-- plano_agro
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_agro t1
+LEFT JOIN silver.plano_agro t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_agro t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_nacional
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_nacional t1
+LEFT JOIN silver.plano_nacional t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_nacional t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_sp
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_sp t1
+LEFT JOIN silver.plano_sp t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_sp t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_federal
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_federal t1
+LEFT JOIN silver.plano_federal t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_federal t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_itabirito
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_itabirito t1
+LEFT JOIN silver.plano_itabirito t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_itabirito t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200
+
+------------------------------------------------------------------------------------------
+
+-- plano_joao_pessoa
+
+SELECT 
+	t1.page_number,
+	LENGTH(t1.content) AS bronze_len,
+	LENGTH(t2.content) AS silver_len,
+	t1.content as bronze_full_content,
+	t2.content as silver_full_content,
+	SUBSTRING(t1.content, -20) as bronze_end_content,
+	SUBSTRING(t2.content, -20) as silver_end_content,
+	t3.embedding
+FROM
+bronze.plano_joao_pessoa t1
+LEFT JOIN silver.plano_joao_pessoa t2 on (t1.page_number = t2.page_number)
+LEFT JOIN gold.plano_joao_pessoa t3 ON (t2.page_number = t3.page_number)
+ORDER BY t1.page_number 
+LIMIT 200

@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./front-bcg
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Porta do React
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./back-bcg
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Porta do Flask

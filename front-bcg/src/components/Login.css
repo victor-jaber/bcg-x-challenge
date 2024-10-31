@@ -1,0 +1,108 @@
+/* src/App.css */
+.App {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .login-container {
+    display: flex;
+    width: 100%;
+  }
+  
+  .login-form {
+    width: 40vw;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-form h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .login-form p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .login-image {
+    width: 60%;
+    background-image: url('/public/wpp.webp'); /* Substitua pela URL da sua imagem */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222226;
+}
+  
+  .input-container {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .input-container input {
+    width: 30vw;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .input-container input:focus {
+    outline: none;
+    border-color: #0C3140; /* Azul claro */
+    box-shadow: 0 0 5px rgba(144, 202, 249, 0.5); /* Sombra azul clara */
+  }
+  
+  .input-icon, .toggle-password {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0C3140;
+    font-size: 1.2rem;
+  }
+  
+  .input-icon {
+    right: 10px;
+  }
+  
+  .toggle-password {
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  .form-button,
+  .login-form button {
+    width: 50%;
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0C3140;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .form-button:hover,
+  .login-form button:hover {
+    background-color: #0C3140/* src/App.css */
+  }
+
+  .form-link {
+    color: #0C3140;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  

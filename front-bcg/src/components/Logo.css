@@ -1,0 +1,12 @@
+/* src/Logo.css */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo-image {
+    max-width: 150px;
+    height: auto;
+  }
+  
